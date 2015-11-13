@@ -43,3 +43,25 @@ gulp.task("min:css", function () {
 });
 
 gulp.task("min", ["min:js", "min:css"]);
+
+gulp.task("copy", ["clean"], function () {
+  var bower = {
+    "bootstrap": "bootstrap/dist/**/*.{js,map,css,ttf,svg,woff,eot}",
+    "bootstrap-touch-carousel": "bootstrap-touch-carousel/dist/**/*.{js,css}",
+    "hammer.js": "hammer.js/hammer*.{js,map}",
+    "jquery": "jquery/jquery*.{js,map}",
+    "jquery-validation": "jquery-validation/jquery.validate.js",
+    "jquery-validation-unobtrusive": "jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+    "angular": "angular/angular*.{js,map}",
+    "angular-route": "angular-route/angular-route*.{js,map}",
+    "angular-resource": "angular-resource/angular-resource*.{js,map}"
+  }
+
+
+  for (var destinationDir in bower) {
+    gulp.src(paths.bower + bower[destinationDir])
+      .pipe(gulp.dest(paths.lib + destinationDir));
+
+  }
+
+});
